@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hip-Hop Gallery – Philippine Hip-Hop History | CodieBeats</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#07060e;
+  --surface:#0f0d1a;
+  --card:#161326;
+  --card2:#1e1a30;
+  --border:#2a2540;
+  --border2:#38325a;
+  --accent:#7c3aed;
+  --accent3:#c4b5fd;
+  --gold:#f59e0b;
+  --green:#10b981;
+  --cyan:#06b6d4;
+  --red:#ef4444;
+  --text:#f0eeff;
+  --muted:#8a849e;
+  --dim:#3f3a58;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 10%,rgba(124,58,237,.16) 0%,transparent 50%),
+    radial-gradient(ellipse at 85% 90%,rgba(6,182,212,.08) 0%,transparent 50%);
+  color:var(--text);
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(124,58,237,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.05) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(7,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 1.25rem;height:58px;display:flex;align-items:center;justify-content:space-between;gap:.5rem;}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
+.nav-logo{width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;}
+.nav-name{font-weight:700;font-size:.95rem;color:var(--text);}
+.nav-links{display:flex;align-items:center;gap:.1rem;flex:1;justify-content:center;}
+.nav-link{color:var(--muted);font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:6px;transition:color .15s,background .15s;}
+.nav-link:hover{color:var(--text);background:rgba(124,58,237,.1);}
+.nav-link.active{color:var(--cyan);}
+.nav-hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;border:none;background:none;}
+.nav-hamburger span{width:20px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.nav-drawer{position:fixed;top:58px;left:0;right:0;z-index:199;background:rgba(7,6,14,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.75rem 1.25rem;display:none;flex-direction:column;gap:.2rem;}
+.nav-drawer.open{display:flex;}
+.nav-drawer .nav-link{font-size:14px;padding:8px 12px;border-radius:8px;}
+.nav-cta{background:var(--accent);color:#fff;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;flex-shrink:0;}
+.nav-cta:hover{opacity:.85;}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:7rem 1.5rem 4rem;text-align:center;overflow:hidden;}
+.hero-glow{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(6,182,212,.12) 0%,rgba(124,58,237,.12) 40%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:var(--cyan);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 13px;border-radius:20px;margin-bottom:1rem;}
+.hero h1{font-size:clamp(2.2rem,7vw,4.5rem);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:.5rem;}
+.hero h1 .ph{background:linear-gradient(135deg,#06b6d4,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero h1 .hh{background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:clamp(.9rem,2vw,1.1rem);color:var(--muted);max-width:600px;margin:.6rem auto 2rem;}
+.hero-pills{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+.hero-pill{display:inline-block;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--accent3);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;}
+
+/* LAYOUT */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem;}
+.section{position:relative;z-index:1;padding:3.5rem 0;}
+.sec-badge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:2px 10px;border-radius:20px;margin-bottom:.45rem;}
+.sec-badge.purple{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);color:var(--accent3);}
+.sec-badge.cyan{background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);color:var(--cyan);}
+.sec-badge.gold{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:var(--gold);}
+.sec-badge.red{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:var(--red);}
+.sec-title{font-size:clamp(1.3rem,3.5vw,2rem);font-weight:800;line-height:1.2;}
+.sec-title.cyan{color:var(--cyan);}
+.sec-title.gold{color:var(--gold);}
+.sec-title.green{color:var(--green);}
+.sec-title.red{color:var(--red);}
+.accent-line{width:44px;height:3px;border-radius:2px;margin-top:.35rem;}
+.accent-line.cyan{background:linear-gradient(90deg,var(--cyan),#22d3ee);}
+.accent-line.gold{background:linear-gradient(90deg,var(--gold),#fcd34d);}
+.accent-line.purple{background:linear-gradient(90deg,var(--accent),var(--accent3));}
+.sep{height:1px;background:var(--border);margin:0 1.5rem;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
+.card2{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem;max-width:860px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--cyan),var(--accent),var(--gold));}
+.tl-item{position:relative;margin-bottom:2rem;}
+.tl-dot{position:absolute;left:-2rem;top:4px;width:16px;height:16px;border-radius:50%;border:2px solid;flex-shrink:0;}
+.tl-dot.cyan{background:#0e3a42;border-color:var(--cyan);}
+.tl-dot.purple{background:#2d1563;border-color:var(--accent);}
+.tl-dot.gold{background:#4a2e06;border-color:var(--gold);}
+.tl-dot.red{background:#4a0e0e;border-color:var(--red);}
+.tl-dot.green{background:#0a3028;border-color:var(--green);}
+.tl-year{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.3rem;padding:2px 9px;border-radius:20px;}
+.tl-year.cyan{background:rgba(6,182,212,.12);color:var(--cyan);}
+.tl-year.purple{background:rgba(124,58,237,.12);color:var(--accent3);}
+.tl-year.gold{background:rgba(245,158,11,.1);color:var(--gold);}
+.tl-year.red{background:rgba(239,68,68,.1);color:var(--red);}
+.tl-year.green{background:rgba(16,185,129,.1);color:var(--green);}
+.tl-title{font-size:1.05rem;font-weight:700;margin-bottom:.3rem;}
+.tl-body{font-size:13px;color:var(--muted);line-height:1.75;}
+
+/* ARTIST CARDS */
+.artist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.artist-card{background:var(--card2);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s;}
+.artist-card:hover{transform:translateY(-3px);border-color:var(--accent);}
+.artist-banner{height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;position:relative;overflow:hidden;}
+.artist-banner svg{position:absolute;inset:0;width:100%;height:100%;opacity:.2;}
+.artist-body{padding:.9rem 1rem;}
+.artist-name{font-size:.9rem;font-weight:700;margin-bottom:.2rem;}
+.artist-type{font-size:10.5px;color:var(--muted);margin-bottom:.5rem;}
+.artist-tags{display:flex;flex-wrap:wrap;gap:.25rem;}
+.artist-tag{font-size:9.5px;padding:1px 7px;border-radius:10px;font-weight:700;}
+
+/* GROUPS GRID */
+.groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem;}
+.group-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem;transition:border-color .2s;}
+.group-card:hover{border-color:var(--cyan);}
+.group-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
+.group-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.group-name{font-size:.9rem;font-weight:700;}
+.group-from{font-size:10.5px;color:var(--muted);}
+.group-desc{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:.6rem;}
+.group-members{font-size:11px;color:var(--accent3);}
+
+/* ORIGIN STORY */
+.origin-two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;}
+.origin-quote{background:var(--card2);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;padding:1rem 1.1rem;margin-bottom:.85rem;}
+.origin-quote p{font-size:13px;color:var(--muted);line-height:1.75;font-style:italic;}
+.origin-quote cite{font-size:11px;color:var(--cyan);font-style:normal;margin-top:.4rem;display:block;}
+.info-box{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.75rem;}
+.info-box h4{font-size:.88rem;font-weight:700;margin-bottom:.4rem;color:var(--gold);}
+.info-box ul{list-style:none;display:flex;flex-direction:column;gap:.25rem;}
+.info-box ul li{font-size:12.5px;color:var(--muted);display:flex;align-items:flex-start;gap:6px;}
+.info-box ul li::before{content:'→';color:var(--cyan);flex-shrink:0;}
+
+/* PHOTO GALLERY */
+.ph-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem;}
+.ph-slot{background:var(--card);border:2px dashed var(--border2);border-radius:10px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;position:relative;overflow:hidden;cursor:pointer;transition:border-color .15s;}
+.ph-slot:hover{border-color:var(--cyan);}
+.ph-slot img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
+.ph-slot .ph-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;opacity:0;transition:opacity .2s;}
+.ph-slot:hover .ph-overlay{opacity:1;}
+.ph-slot svg{width:22px;height:22px;color:var(--dim);}
+.ph-label{font-size:9.5px;color:var(--dim);font-weight:600;}
+.ph-size{font-size:8.5px;color:var(--cyan);}
+
+/* BRANDS SECTION */
+.brands-section{border:2px dashed rgba(6,182,212,.4);border-radius:16px;padding:2rem;background:rgba(6,182,212,.03);}
+.brands-header{text-align:center;margin-bottom:1.75rem;}
+.brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;}
+.brand-slot{background:var(--card2);border:2px dashed var(--border2);border-radius:10px;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;cursor:pointer;transition:border-color .15s,background .15s;}
+.brand-slot:hover{border-color:var(--cyan);background:rgba(6,182,212,.05);}
+.brand-slot svg{width:20px;height:20px;color:var(--dim);}
+.brand-slot .bs-label{font-size:9px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.brand-slot .bs-size{font-size:8px;color:var(--cyan);}
+
+/* STATS */
+.stats-bar{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;padding:2rem 1.5rem;background:rgba(6,182,212,.04);border:1px solid rgba(6,182,212,.15);border-radius:14px;margin-bottom:2rem;}
+.stat-item{text-align:center;}
+.stat-num{font-size:2rem;font-weight:800;color:var(--cyan);}
+.stat-lbl{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+/* BACK BTN */
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;text-decoration:none;padding:6px 12px;border-radius:7px;border:1px solid var(--border);transition:all .15s;margin-bottom:1rem;}
+.back-btn:hover{color:var(--text);border-color:var(--accent);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;}
+.footer-copy{font-size:12px;color:var(--dim);margin-top:.5rem;}
+
+/* RESPONSIVE */
+@media(max-width:860px){.origin-two-col{grid-template-columns:1fr;}}
+@media(max-width:600px){.artist-grid{grid-template-columns:1fr 1fr;}.groups-grid{grid-template-columns:1fr;}.ph-gallery{grid-template-columns:repeat(2,1fr);}.brands-grid{grid-template-columns:repeat(2,1fr);}.nav-links{display:none;}.nav-hamburger{display:flex;}}
+@media(max-width:400px){.artist-grid{grid-template-columns:1fr;}.brands-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo">CB</div>
+    <span class="nav-name">CodieBeats</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="index.html#about" class="nav-link">About</a>
+    <a href="index.html#beats" class="nav-link">Beats</a>
+    <a href="hip-hop-gallery.html" class="nav-link active">Hip-Hop Gallery</a>
+    <a href="secret-sauce.html" class="nav-link" style="color:var(--gold);">✨ Secret Sauce</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+    <a href="https://www.youtube.com/@CodieBeats" target="_blank" class="nav-cta">Subscribe ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" class="nav-link" onclick="closeMenu()">Home</a>
+  <a href="index.html#about" class="nav-link" onclick="closeMenu()">About</a>
+  <a href="index.html#beats" class="nav-link" onclick="closeMenu()">Beats</a>
+  <a href="hip-hop-gallery.html" class="nav-link active" onclick="closeMenu()">Hip-Hop Gallery</a>
+  <a href="secret-sauce.html" class="nav-link" style="color:var(--gold);">✨ Secret Sauce</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">🎤 Culture · History · Legacy</div>
+  <h1><span class="ph">Philippine</span><br><span class="hh">Hip-Hop</span> Gallery</h1>
+  <p class="hero-sub">A deep dive into the origins, culture, artists, and stories that shaped Filipino Hip-Hop — from the streets of Manila to the global stage.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">🇵🇭 Philippines</span>
+    <span class="hero-pill">📅 1980s – Present</span>
+    <span class="hero-pill">🎤 Rap &amp; Hip-Hop</span>
+    <span class="hero-pill">🎵 Original Pinoy Hip-Hop</span>
+    <span class="hero-pill">🏙️ Manila Underground</span>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- STATS -->
+<section class="section" style="padding:2rem 0;">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-item"><div class="stat-num" id="s1">0</div><div class="stat-lbl">Years of PH Hip-Hop</div></div>
+      <div class="stat-item"><div class="stat-num" id="s2">0</div><div class="stat-lbl">Pioneer Artists</div></div>
+      <div class="stat-item"><div class="stat-num" id="s3">0</div><div class="stat-lbl">Albums Released</div></div>
+      <div class="stat-item"><div class="stat-num" id="s4">0</div><div class="stat-lbl">Active Rap Groups</div></div>
+      <div class="stat-item"><div class="stat-num" id="s5">0</div><div class="stat-lbl">Global Listeners</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ORIGINS -->
+<section class="section" id="origins">
+  <div class="container">
+    <div style="margin-bottom:1.75rem;">
+      <div class="sec-badge cyan">Origins</div>
+      <div class="sec-title cyan">Where It All Began</div>
+      <div class="accent-line cyan"></div>
+      <p style="color:var(--muted);font-size:13px;margin-top:.45rem;">Hip-Hop didn't just arrive in the Philippines — it was absorbed, transformed, and made entirely Filipino.</p>
+    </div>
+    <div class="origin-two-col">
+      <div>
+        <div class="origin-quote">
+          <p>"Hip-hop in the Philippines wasn't just imported American culture. Filipino artists took the music, the language, and the struggle — and made it entirely their own."</p>
+          <cite>— Philippine Music Historians</cite>
+        </div>
+        <div class="card" style="margin-bottom:.85rem;">
+          <div style="font-size:.95rem;font-weight:700;color:var(--gold);margin-bottom:.5rem;">🌍 The Global Roots</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.75;">Hip-hop originated in the South Bronx, New York in the early 1970s. DJ Kool Herc is widely credited as the founding father, pioneering the technique of isolating and extending breakbeats. The four pillars — DJing, MCing (rapping), breakdancing (B-boying), and graffiti art — became a global youth culture movement that crossed every ocean.</p>
+        </div>
+        <div class="card" style="margin-bottom:.85rem;">
+          <div style="font-size:.95rem;font-weight:700;color:var(--cyan);margin-bottom:.5rem;">🇵🇭 Hip-Hop Arrives in the Philippines</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.75;">Hip-hop reached the Philippines in the early 1980s through OFWs (Overseas Filipino Workers) returning from the United States and through American TV shows and music videos. Filipino-Americans on the West Coast played a massive role — the Filipino community in California was one of the earliest Asian adopters of hip-hop culture. By the late 1980s, breakdancing crews and rap groups were forming in Manila, Cebu, and Davao.</p>
+        </div>
+        <div class="card">
+          <div style="font-size:.95rem;font-weight:700;color:var(--green);margin-bottom:.5rem;">🎙️ Original Pinoy Hip-Hop (OPH)</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.75;">By the 1990s, Filipino rappers began writing in Filipino, Taglish (Tagalog + English), and regional dialects. This gave birth to what is now called Original Pinoy Hip-Hop (OPH). Artists tackled social issues — poverty, politics, corruption, and everyday Filipino life. The music became a mirror of the streets, the barangay, and the struggle of the masa (common people).</p>
+        </div>
+      </div>
+      <div>
+        <div class="info-box">
+          <h4>📅 Key Milestones</h4>
+          <ul>
+            <li>1980s — Breakdancing crews emerge in Manila</li>
+            <li>1990 — Francis Magalona releases debut album "Yo!"</li>
+            <li>1992 — Andrew E. drops "Humanap Ka Ng Panget"</li>
+            <li>1995 — Rap Asia and underground battles grow</li>
+            <li>1999 — Gloc-9 begins making waves in the scene</li>
+            <li>2000s — Fliptop Battle League founded</li>
+            <li>2010 — Fliptop goes viral on YouTube</li>
+            <li>2012 — Ex Battalion rises from social media</li>
+            <li>2015 — Loonie, Abra, Shehyee dominate battle rap</li>
+            <li>2020s — Matthaios, Lil Sio, Ace Banzuelo lead new wave</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🎵 Four Pillars of Philippine Hip-Hop</h4>
+          <ul>
+            <li>MCing / Rapping — Filipino and Taglish wordplay</li>
+            <li>DJing — Turntablism and beat switching</li>
+            <li>Breakdancing — B-boy crews and competitions</li>
+            <li>Graffiti Art — Metro Manila walls and murals</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>🏙️ Key Cities &amp; Scenes</h4>
+          <ul>
+            <li>Manila — Ground zero of Philippine Hip-Hop</li>
+            <li>Quezon City — Underground clubs and cypher spots</li>
+            <li>Cebu City — Strong Visayan rap movement</li>
+            <li>Davao — Mindanao hip-hop and street culture</li>
+            <li>Pampanga — Central Luzon battle rap scene</li>
+          </ul>
+        </div>
+        <div class="info-box" style="border-color:rgba(6,182,212,.25);">
+          <h4 style="color:var(--cyan);">🌐 Why Filipino Hip-Hop is Unique</h4>
+          <ul>
+            <li>Code-switching between Filipino, English, and dialects</li>
+            <li>Strong emphasis on lyrical wordplay and wit</li>
+            <li>Deep connection to social commentary</li>
+            <li>Battle rap culture (Fliptop) is world-class</li>
+            <li>Blending hip-hop with OPM, reggae, and R&B</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- TIMELINE -->
+<section class="section" id="timeline">
+  <div class="container">
+    <div style="margin-bottom:2rem;text-align:center;">
+      <div class="sec-badge gold">Timeline</div>
+      <div class="sec-title gold">The History of Philippine Hip-Hop</div>
+      <div class="accent-line gold" style="margin:.35rem auto 0;"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-year cyan">Early 1980s</div>
+        <div class="tl-title">Breakdancing Hits the Philippines</div>
+        <div class="tl-body">Inspired by movies like Wild Style and Beat Street, breakdancing crews form across Metro Manila. Filipino youth in Cubao, Quiapo, and Divisoria start battle circles. The visual and physical element of hip-hop takes root before the music fully arrives.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot purple"></div>
+        <div class="tl-year purple">1988–1990</div>
+        <div class="tl-title">Francis M. and the Birth of OPH</div>
+        <div class="tl-body">Francis Magalona, known as "The Master Rapper" or "FrancisM", releases his debut album "Yo!" in 1990. His hit "Mga Kababayan Ko" (My Fellow Countrymen) becomes a cultural anthem — rapping in Filipino for the first time on a mainstream level. This moment is widely considered the birth of Original Pinoy Hip-Hop.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-year gold">1990s</div>
+        <div class="tl-title">Andrew E., Rap Asia &amp; the Underground Boom</div>
+        <div class="tl-body">Andrew Espiritu (Andrew E.) drops "Humanap Ka Ng Panget" and becomes a household name with his humorous, Taglish rapping style. Meanwhile, underground rap groups multiply in Manila and regional cities. Radio stations begin featuring OPM rap regularly.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-year red">Late 1990s – 2000s</div>
+        <div class="tl-title">Gloc-9, Salbakuta &amp; Social Consciousness</div>
+        <div class="tl-body">Gloc-9 emerges as one of the most technically skilled Filipino rappers, blending storytelling with social critique. Salbakuta's "Stupid Love" becomes a massive crossover hit. The era sees hip-hop intersecting with OPM, folk, and rock influences. Labels begin signing rap acts and the genre moves from underground to mainstream.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-year green">2010s</div>
+        <div class="tl-title">Fliptop Battle League Goes Global</div>
+        <div class="tl-body">Founded by Alaric Riam Yuson (Anygma), Fliptop becomes Southeast Asia's biggest battle rap league and explodes on YouTube with millions of views. Battle rappers like Loonie, Abra, Shehyee, Dello, and Tipsy D become celebrities. Ex Battalion, a hip-hop/R&B group, rises through social media and reaches millions of fans.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-year cyan">2020s</div>
+        <div class="tl-title">New Wave: Matthaios, Lil Sio &amp; SoundCloud Rap</div>
+        <div class="tl-body">A new generation of artists — Matthaios, Lil Sio, Flow G, Ace Banzuelo, and Skusta Clee — dominate the streaming era. Filipino drill, trap, and lo-fi rap take over YouTube, Spotify, and TikTok. The global reach of Philippine hip-hop has never been wider.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- PIONEER ARTISTS -->
+<section class="section" id="artists">
+  <div class="container">
+    <div style="margin-bottom:1.75rem;">
+      <div class="sec-badge purple">Artists</div>
+      <div class="sec-title" style="background:linear-gradient(135deg,#c4b5fd,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Pioneer Artists &amp; Icons</div>
+      <div class="accent-line purple"></div>
+      <p style="color:var(--muted);font-size:13px;margin-top:.4rem;">The artists who built the foundation of Philippine Hip-Hop.</p>
+    </div>
+    <div class="artist-grid" id="artist-grid"></div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- RAP GROUPS & GANGS -->
+<section class="section" id="groups">
+  <div class="container">
+    <div style="margin-bottom:1.75rem;">
+      <div class="sec-badge red">Groups &amp; Collectives</div>
+      <div class="sec-title red">Rap Groups, Crews &amp; Collectives</div>
+      <div class="accent-line" style="background:linear-gradient(90deg,var(--red),#fca5a5);"></div>
+      <p style="color:var(--muted);font-size:13px;margin-top:.4rem;">From underground crews to mainstream groups — the collectives that shaped Filipino hip-hop culture.</p>
+    </div>
+    <div class="groups-grid" id="groups-grid"></div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- HIP-HOP PHOTO GALLERY -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div style="margin-bottom:1.5rem;">
+      <div class="sec-badge cyan">Gallery</div>
+      <div class="sec-title cyan">Hip-Hop Photo Gallery</div>
+      <div class="accent-line cyan"></div>
+      <p style="color:var(--muted);font-size:13px;margin-top:.4rem;">Upload photos of concerts, artists, events, or hip-hop culture moments below.</p>
+    </div>
+    <div class="ph-gallery" id="ph-gallery"></div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- BRANDS / SPONSORS -->
+<section class="section" id="brands">
+  <div class="container">
+    <div class="brands-section">
+      <div class="brands-header">
+        <div class="sec-badge cyan" style="margin-bottom:.45rem;">Sponsors &amp; Brands</div>
+        <div class="sec-title cyan">Partners &amp; Sponsors</div>
+        <div class="accent-line cyan" style="margin:.35rem auto 0;"></div>
+        <p style="color:var(--muted);font-size:13px;margin-top:.5rem;">Upload brand logos or sponsor images in the slots below. Recommended size: 200 × 90 px (horizontal logo).</p>
+      </div>
+      <div class="brands-grid" id="brands-grid"></div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:13px;padding:6px 14px;border:1px solid var(--border);border-radius:7px;margin-bottom:1rem;transition:color .15s,border-color .15s;" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">← Back to CodieBeats</a>
+  <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:.4rem;">
+    <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;">CB</div>
+    <span style="font-weight:700;font-size:.92rem;">CodieBeats</span>
+    <span style="font-size:.75rem;color:var(--accent3);">℗ ©</span>
+    <span style="font-size:.75rem;color:var(--dim);">2016 – 2026</span>
+  </div>
+  <div class="footer-copy">Hip-Hop Gallery — Philippine Hip-Hop History &amp; Culture · CodieBeats</div>
+</footer>
+
+<script>
+/* NAV */
+const hbg=document.getElementById('hamburger'),drawer=document.getElementById('navDrawer');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');drawer.classList.toggle('open');});
+function closeMenu(){hbg.classList.remove('open');drawer.classList.remove('open');}
+document.addEventListener('click',e=>{if(!e.target.closest('nav')&&!e.target.closest('.nav-drawer'))closeMenu();});
+
+/* STATS ANIMATION */
+function animCount(id,target,suffix,dur){
+  const el=document.getElementById(id);let start=0,step=target/80;
+  function t(){start+=step;if(start>=target){el.textContent=target+suffix;return;}el.textContent=Math.floor(start)+suffix;requestAnimationFrame(t);}
+  setTimeout(t,400);
+}
+animCount('s1',40,'+',800);
+animCount('s2',200,'+',900);
+animCount('s3',1000,'+',1000);
+animCount('s4',50,'+',1100);
+animCount('s5',5,'M+',1200);
+
+/* ARTISTS */
+const artists=[
+  {n:'Francis Magalona',e:'👑',role:'The Master Rapper',col:'#7c3aed',tags:['Pioneer','OG','Icon'],desc:'The "Master Rapper" — considered the father of Filipino hip-hop. His music combined national pride, social commentary, and infectious rap flows.',era:'1990–2009'},
+  {n:'Andrew E.',e:'😄',role:'Comedy Rap King',col:'#f59e0b',tags:['Taglish','Comedy','OG'],desc:'Known for humorous Taglish rap, massive crossover hits, and pioneering the mainstream pop-rap sound in the Philippines.',era:'1990s–2000s'},
+  {n:'Gloc-9',e:'🎙️',role:'Street Poet',col:'#10b981',tags:['Lyricist','Social','Raw'],desc:'Widely regarded as the most technically skilled Filipino rapper. His storytelling and social commentary set the standard for lyrical hip-hop.',era:'2000s–Present'},
+  {n:'Ex Battalion',e:'🔥',role:'Group / New School',col:'#e24b4a',tags:['Trap','R&B','Viral'],desc:'Social media-born group combining hip-hop, R&B, and OPM. Massively popular with Filipino youth, topping charts with multiple hits.',era:'2010s–Present'},
+  {n:'Loonie',e:'⚔️',role:'Battle Rap Legend',col:'#06b6d4',tags:['Battle Rap','Fliptop','Bars'],desc:'Considered the greatest battle rapper in Philippine history. His technical skill, wit, and performance on Fliptop made him a national celebrity.',era:'2010s–Present'},
+  {n:'Abra',e:'🎤',role:'Battle Rapper / Recording Artist',col:'#a78bfa',tags:['Bars','Humor','Fliptop'],desc:'One of Fliptop\'s most popular personalities, Abra crossed over into mainstream music with catchy rap songs that blended battle wit with commercial appeal.',era:'2010s–Present'},
+  {n:'Matthaios',e:'🌊',role:'New Wave Pioneer',col:'#1D9E75',tags:['New Wave','Drill','Trap'],desc:'Leading the 2020s renaissance of Filipino hip-hop with introspective, melodic rap that blends Filipino experiences with global trap and drill sounds.',era:'2019–Present'},
+  {n:'Flow G',e:'⚡',role:'Rap / R&B Crossover',col:'#f59e0b',tags:['Melodic','R&B','Viral'],desc:'One of the most-streamed Filipino rap artists, known for emotional melodic rap and chart-topping collaborations with Skusta Clee.',era:'2018–Present'},
+];
+const agEl=document.getElementById('artist-grid');
+artists.forEach(a=>{
+  agEl.innerHTML+=`<div class="artist-card">
+    <div class="artist-banner" style="background:linear-gradient(135deg,${a.col}33,${a.col}11);">
+      <span style="font-size:2rem;z-index:1;">${a.e}</span>
+      <div style="position:absolute;bottom:6px;right:8px;font-size:9px;color:rgba(255,255,255,.4);">${a.era}</div>
+    </div>
+    <div class="artist-body">
+      <div class="artist-name">${a.n}</div>
+      <div class="artist-type">${a.role}</div>
+      <p style="font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:.5rem;">${a.desc}</p>
+      <div class="artist-tags">${a.tags.map(t=>`<span class="artist-tag" style="background:${a.col}18;color:${a.col};border:1px solid ${a.col}33;">${t}</span>`).join('')}</div>
+    </div>
+  </div>`;
+});
+
+/* GROUPS */
+const groups=[
+  {n:'Salbakuta',icon:'🔊',col:'#7c3aed',from:'Manila',members:'Smugglaz, Dong Abay',desc:'"Stupid Love" became one of the biggest OPM crossover hits. Salbakuta blended rap with pop songwriting for mass appeal in the 2000s.'},
+  {n:'Fliptop Battle League',icon:'⚔️',col:'#06b6d4',from:'Metro Manila',members:'Loonie, Abra, Dello, Tipsy D, Shehyee',desc:'Southeast Asia\'s premier battle rap organization. Founded by Anygma, Fliptop elevated Philippine rap to global recognition through YouTube battles with millions of views.'},
+  {n:'Ex Battalion',icon:'🔥',col:'#e24b4a',from:'Manila / NCR',members:'JFlow, Skusta Clee, Flow G, and others',desc:'Started as a group of social media rappers and evolved into one of the most commercially successful hip-hop acts in Philippine history.'},
+  {n:'Tres Fuego',icon:'💀',col:'#f59e0b',from:'Manila Underground',members:'Underground collective',desc:'One of the early underground rap collectives that helped establish the Manila rap scene before mainstream acceptance.'},
+  {n:'Balyan Tribe',icon:'🌿',col:'#10b981',from:'Indigenous / Ethnic Rap',members:'Various',desc:'Represents the intersection of indigenous Filipino culture and hip-hop. Rapping in native dialects and languages, highlighting cultural heritage.'},
+  {n:'Alpha Phonetics',icon:'📻',col:'#a78bfa',from:'Quezon City',members:'Various members',desc:'Underground rap collective from QC known for battle-tested bars and lyrical showcases in the Manila underground circuit.'},
+  {n:'Clashmore Productions',icon:'🎙️',col:'#1D9E75',from:'Metro Manila',members:'Studio collective',desc:'Production house and rap collective that contributed to the professionalization of Philippine hip-hop production and recording.'},
+  {n:'Street Warriors / Crews',icon:'🏙️',col:'#f59e0b',from:'Various Cities',members:'City-based crews',desc:'Countless street rap crews across Manila, Cebu, Davao, and Pampanga formed around neighborhood identity, battle rap, and local pride — forming the grassroots foundation of PH hip-hop.'},
+];
+const ggEl=document.getElementById('groups-grid');
+groups.forEach(g=>{
+  ggEl.innerHTML+=`<div class="group-card">
+    <div class="group-header">
+      <div class="group-icon" style="background:${g.col}18;border:1px solid ${g.col}33;">${g.icon}</div>
+      <div><div class="group-name">${g.n}</div><div class="group-from">📍 ${g.from}</div></div>
+    </div>
+    <div class="group-desc">${g.desc}</div>
+    <div class="group-members">👥 ${g.members}</div>
+  </div>`;
+});
+
+/* PHOTO GALLERY SLOTS */
+const pgEl=document.getElementById('ph-gallery');
+const phLabels=['Concert Photo','Artist Portrait','Event Photo','Street Culture','Battle Scene','Graffiti Art','Studio Session','B-Boy Crew','Album Cover','Cypher Circle','Hip-Hop Art','Community'];
+phLabels.forEach((l,i)=>{
+  pgEl.innerHTML+=`<div class="ph-slot" onclick="triggerUpload(${i})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <span class="ph-label">${l}</span>
+    <span class="ph-size">Recommended: 400×400 px</span>
+    <div class="ph-overlay" style="color:var(--cyan);font-size:11px;font-weight:700;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Upload Image
+    </div>
+  </div>`;
+});
+
+/* BRANDS GRID */
+const bgEl=document.getElementById('brands-grid');
+const brandSizes=['200×90 px','200×90 px','200×90 px','200×90 px','200×90 px','200×90 px','200×90 px','200×90 px','200×90 px','200×90 px'];
+for(let i=0;i<10;i++){
+  bgEl.innerHTML+=`<div class="brand-slot" onclick="triggerBrandUpload(${i})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    <span class="bs-label">Brand Logo</span>
+    <span class="bs-size">${brandSizes[i]}</span>
+  </div>`;
+}
+
+function triggerUpload(i){alert(`To upload a photo to slot ${i+1}:\n\n1. Open index.html or hip-hop-gallery.html in a code editor\n2. Find the ph-gallery slot #${i+1}\n3. Replace the <div class="ph-slot"> with:\n   <img src="YOUR_IMAGE_PATH" alt="..." style="width:100%;height:100%;object-fit:cover;border-radius:8px;">\n\nSee the full guide in the Image Upload Guide section.`);}
+function triggerBrandUpload(i){alert(`To upload brand logo to slot ${i+1}:\n\nReplace the brand-slot div with:\n<div class="brand-slot" style="background:transparent;border-color:rgba(6,182,212,.3);">\n  <img src="YOUR_LOGO_PATH" alt="Brand Name" style="max-width:85%;max-height:70%;object-fit:contain;">\n</div>`);}
+</script>
+</body>
+</html>
